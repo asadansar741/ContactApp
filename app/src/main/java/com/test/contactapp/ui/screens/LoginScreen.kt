@@ -13,21 +13,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.test.contactapp.ui.MainViewModel
-import com.test.contactapp.ui.login.LoginViewModel
 import com.test.contactapp.ui.theme.ContactAppTheme
 
 @Composable
 fun LoginScreen(mainViewModel: MainViewModel){
-    val loginViewModel = hiltViewModel<LoginViewModel>()
     Scaffold(topBar = { AppBar("Login") }) { padding ->
         Surface(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            LoginScreenUI(loginViewModel,mainViewModel)
+            LoginScreenUI(mainViewModel)
         }
     }
 }
@@ -39,16 +36,16 @@ fun AppBar(title: String) {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    ContactAppTheme() {
-        LoginScreen(mainViewModel = MainViewModel())
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun LoginScreenPreview() {
+//    ContactAppTheme() {
+//        LoginScreen(mainViewModel = MainViewModel())
+//    }
+//}
 
 @Composable
-fun LoginScreenUI(loginViewModel: LoginViewModel,mainViewModel: MainViewModel){
+fun LoginScreenUI(mainViewModel: MainViewModel){
 
     var userName by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -61,7 +58,7 @@ fun LoginScreenUI(loginViewModel: LoginViewModel,mainViewModel: MainViewModel){
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Login Here",
+            text = "User Name",
             style = MaterialTheme.typography.h6,
             fontWeight = FontWeight.Bold
         )
@@ -104,11 +101,11 @@ fun LoginScreenUI(loginViewModel: LoginViewModel,mainViewModel: MainViewModel){
     ){
         Button(
             onClick = {
-                if (userName.isNotEmpty() || password.isNotEmpty()){
+                if (userName.isEmpty() || password.isEmpty()){
                     mainViewModel.showCustomDialog("Invalid User Name or Password")
                 }
                 else{
-                    loginViewModel.userLogin(userName,password)
+                    mainViewModel.userLogin(userName,password)
                 }
             },
             modifier = Modifier.fillMaxWidth(),

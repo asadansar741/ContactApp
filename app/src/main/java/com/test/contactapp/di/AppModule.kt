@@ -18,7 +18,7 @@ import javax.inject.Singleton
 object AppModule {
 
     @Provides
-    fun provedBaseUrl() : String = "https://reqres.in/api"
+    fun provedBaseUrl() : String = "https://reqres.in/api/"
 
 
     @Provides

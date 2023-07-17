@@ -30,6 +30,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ContactAppTheme {
-        LoginScreen(mainViewModel = MainViewModel())
+//        LoginScreen(mainViewModel = MainViewModel())
     }
 }
