@@ -9,6 +9,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.test.contactapp.data.model.ContactRequest
 import com.test.contactapp.data.model.Data
 import com.test.contactapp.data.model.LoginRequest
 import com.test.contactapp.data.repository.ContactListDataSource
@@ -89,6 +90,38 @@ constructor(
         }
         else{
             showCustomDialog("Invalid Credential")
+        }
+    }
+    fun addContact(name: String, job: String) {
+        if (name.isNotEmpty() && job.isNotEmpty()){
+            val contactRequest = ContactRequest(
+                name,
+                job
+            )
+            viewModelScope.launch {
+                repository.addContact(contactRequest).collect{
+                    when(it){
+                        is ApiState.Loading ->{
+                            showLoadingDialog()
+                            Log.d("MyTag", "Loading")
+                        }
+                        is ApiState.Success ->{
+                            Log.d("MyTag", "Success")
+                            dismissLoadingDialog()
+                            val contact = it.data!!
+                            showCustomDialog("Contact Added")
+                        }
+                        is ApiState.Failure ->{
+                            dismissLoadingDialog()
+                            showCustomDialog("something went wrong")
+                            Log.d("MyTag", it.message)
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            showCustomDialog("Invalid data")
         }
     }
 

@@ -7,10 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.test.contactapp.ui.MainViewModel
-import com.test.contactapp.ui.screens.ContactListScreen
-import com.test.contactapp.ui.screens.CustomDialog
-import com.test.contactapp.ui.screens.LoadingDialog
-import com.test.contactapp.ui.screens.LoginScreen
+import com.test.contactapp.ui.screens.*
 import com.test.contactapp.util.Destination
 import com.test.contactapp.util.LOGIN_SCREEN
 
@@ -28,7 +25,7 @@ fun ContactAppNavigation(mainViewModel: MainViewModel) {
             ContactListScreen(mainViewModel)
         }
         composable(Destination.AddContact.rout){
-//            AddContactScreen(viewModel)
+            AddContactScreen(mainViewModel)
         }
     }
 

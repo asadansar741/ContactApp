@@ -1,8 +1,6 @@
 package com.test.contactapp.data.service
 
-import com.test.contactapp.data.model.ContactListPagedResponse
-import com.test.contactapp.data.model.LoginRequest
-import com.test.contactapp.data.model.LoginResponse
+import com.test.contactapp.data.model.*
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -11,6 +9,9 @@ class ContactApiService @Inject constructor(private val api: ContactApi){
     suspend fun login(
         loginRequest: LoginRequest
     ): Response<LoginResponse> = api.login(loginRequest)
+    suspend fun addContact(
+        contactRequest: ContactRequest
+    ): Response<AddContactResponse> = api.addContact(contactRequest)
 
 
     suspend fun getContactPagedList(

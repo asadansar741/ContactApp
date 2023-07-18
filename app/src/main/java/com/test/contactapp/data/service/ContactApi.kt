@@ -1,9 +1,7 @@
 package com.test.contactapp.data.service
 
 
-import com.test.contactapp.data.model.ContactListPagedResponse
-import com.test.contactapp.data.model.LoginRequest
-import com.test.contactapp.data.model.LoginResponse
+import com.test.contactapp.data.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -14,6 +12,10 @@ interface ContactApi {
     suspend fun login(
         @Body loginRequest: LoginRequest
     ): Response<LoginResponse>
+    @POST("users")
+    suspend fun addContact(
+        @Body contactRequest: ContactRequest
+    ): Response<AddContactResponse>
 
 
     @GET("users")
