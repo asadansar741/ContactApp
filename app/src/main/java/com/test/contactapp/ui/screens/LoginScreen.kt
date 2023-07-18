@@ -36,13 +36,6 @@ fun AppBar(title: String) {
     )
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun LoginScreenPreview() {
-//    ContactAppTheme() {
-//        LoginScreen(mainViewModel = MainViewModel())
-//    }
-//}
 
 @Composable
 fun LoginScreenUI(mainViewModel: MainViewModel){
@@ -112,7 +105,7 @@ fun LoginScreenUI(mainViewModel: MainViewModel){
                 modifier = Modifier.fillMaxWidth(),
                 content = {
                     Text(
-                        text = "Submit",
+                        text = "Login",
                         color = Color.White,
                         fontWeight = FontWeight.Bold
                     )
