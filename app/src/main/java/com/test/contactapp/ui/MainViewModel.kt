@@ -61,26 +61,27 @@ constructor(
                 repository.loginUser(loginRequest).collect{
                     when(it){
                         is ApiState.Loading ->{
-//                            _isLoadingState.postValue(true)
+                            showLoadingDialog()
                             Log.d("MyTag", "Loading")
                         }
                         is ApiState.Success ->{
                             Log.d("MyTag", "Success")
-//                            _isLoadingState.postValue(false)
+                            dismissLoadingDialog()
                             val token = it.data!!.token
                             navigateToContactListScreen()
 
                         }
                         is ApiState.Failure ->{
+                            dismissLoadingDialog()
+                            showCustomDialog("No Record Found")
                             Log.d("MyTag", it.message)
-//                            _isLoadingState.postValue(false)
                         }
                     }
                 }
             }
         }
         else{
-            // show dialog to invalid username or password
+            showCustomDialog("Invalid Credential")
         }
     }
 }
