@@ -17,7 +17,7 @@ import com.test.contactapp.ui.MainViewModel
 
 @Composable
 fun AddContactScreen(mainViewModel: MainViewModel){
-    Scaffold(topBar = { AppBar("Login") }) { padding ->
+    Scaffold(topBar = { AppBar("Add Contact") }) { padding ->
         Surface(
             modifier = Modifier
                 .fillMaxSize()

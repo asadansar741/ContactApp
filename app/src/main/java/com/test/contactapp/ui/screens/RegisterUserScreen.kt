@@ -17,7 +17,7 @@ import com.test.contactapp.ui.MainViewModel
 
 @Composable
 fun RegisterUserScreen(mainViewModel: MainViewModel){
-    Scaffold(topBar = { AppBar("Register") }) { padding ->
+    Scaffold(topBar = { AppBar("User Registration") }) { padding ->
         Surface(
             modifier = Modifier
                 .fillMaxSize()
