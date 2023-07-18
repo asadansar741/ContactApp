@@ -50,61 +50,13 @@ fun ContactListScreenUI(viewModel: MainViewModel){
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp),
+            .padding(1.dp),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
     ) {
         LazyColumn {
             items(items = contactList) { contact ->
                 EachRow(contact)
-            }
-
-            when (val state = contactList.loadState.refresh) { //FIRST LOAD
-                is LoadState.Error -> {
-                    //TODO Error Item
-                    //state.error to get error message
-                }
-                is LoadState.Loading -> { // Loading UI
-                    item {
-                        Column(
-                            modifier = Modifier
-                                .fillParentMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
-                        ) {
-                            Text(
-                                modifier = Modifier
-                                    .padding(8.dp),
-                                text = "Refresh Loading"
-                            )
-
-                            CircularProgressIndicator(color = Color.Black)
-                        }
-                    }
-                }
-                else -> {}
-            }
-
-            when (val state = contactList.loadState.append) { // Pagination
-                is LoadState.Error -> {
-                    //TODO Pagination Error Item
-                    //state.error to get error message
-                }
-                is LoadState.Loading -> { // Pagination Loading UI
-                    item {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
-                        ) {
-                            Text(text = "Pagination Loading")
-
-                            CircularProgressIndicator(color = Color.Black)
-                        }
-                    }
-                }
-                else -> {}
             }
         }
     }
@@ -128,10 +80,10 @@ fun ContactListScreenUI(viewModel: MainViewModel){
 fun EachRow(item: Data?) {
     Card(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(2.dp)
             .fillMaxWidth()
             .wrapContentHeight(align = Alignment.Top),
-        backgroundColor = Color.White
+        backgroundColor = Color.Gray
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -160,9 +112,7 @@ fun ProfileCard(item: Data? ) {
             horizontalArrangement = Arrangement.Start
         ) {
             item?.apply {
-                ProfilePicture(
-                    avatar
-                )
+                ProfilePicture(avatar)
                 ProfileContent(
                     firstName = first_name ,
                     lastName = last_name
@@ -180,7 +130,7 @@ fun ProfilePicture(imageUrl:String) {
         modifier = Modifier
             .padding(5.dp)
             .width(100.dp)
-            .height(150.dp)
+            .height(128.dp)
     )
     {
         Image(
