@@ -27,6 +27,9 @@ fun ContactAppNavigation(mainViewModel: MainViewModel) {
         composable(Destination.AddContact.rout){
             AddContactScreen(mainViewModel)
         }
+        composable(Destination.RegisterUser.rout){
+            RegisterUserScreen(mainViewModel)
+        }
     }
 
     if (mainViewModel.isCustomDialogShown){

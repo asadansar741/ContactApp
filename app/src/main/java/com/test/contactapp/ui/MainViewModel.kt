@@ -12,6 +12,7 @@ import androidx.paging.cachedIn
 import com.test.contactapp.data.model.ContactRequest
 import com.test.contactapp.data.model.Data
 import com.test.contactapp.data.model.LoginRequest
+import com.test.contactapp.data.model.UserRegister
 import com.test.contactapp.data.repository.ContactListDataSource
 import com.test.contactapp.data.repository.ContactRepository
 import com.test.contactapp.util.ApiState
@@ -41,6 +42,9 @@ constructor(
     }
     fun navigateToAddContactScreen() {
         naveHostController.navigate(Destination.AddContact.rout)
+    }
+    fun navigateToRegisterUserScreen() {
+        naveHostController.navigate(Destination.RegisterUser.rout)
     }
 
 
@@ -110,6 +114,38 @@ constructor(
                             dismissLoadingDialog()
                             val contact = it.data!!
                             showCustomDialog("Contact Added")
+                        }
+                        is ApiState.Failure ->{
+                            dismissLoadingDialog()
+                            showCustomDialog("something went wrong")
+                            Log.d("MyTag", it.message)
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            showCustomDialog("Invalid data")
+        }
+    }
+    fun registerUser(email: String, password: String) {
+        if (email.isNotEmpty() && password.isNotEmpty()){
+            val userRegister = UserRegister(
+                email,
+                password
+            )
+            viewModelScope.launch {
+                repository.userRegistration(userRegister).collect{
+                    when(it){
+                        is ApiState.Loading ->{
+                            showLoadingDialog()
+                            Log.d("MyTag", "Loading")
+                        }
+                        is ApiState.Success ->{
+                            Log.d("MyTag", "Success")
+                            dismissLoadingDialog()
+                            val user = it.data!!
+                            showCustomDialog("Registration Success")
                         }
                         is ApiState.Failure ->{
                             dismissLoadingDialog()

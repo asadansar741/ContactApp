@@ -12,6 +12,9 @@ class ContactApiService @Inject constructor(private val api: ContactApi){
     suspend fun addContact(
         contactRequest: ContactRequest
     ): Response<AddContactResponse> = api.addContact(contactRequest)
+    suspend fun registerUser(
+        register: UserRegister
+    ): Response<UserRegisterResponse> = api.registerUser(register)
 
 
     suspend fun getContactPagedList(

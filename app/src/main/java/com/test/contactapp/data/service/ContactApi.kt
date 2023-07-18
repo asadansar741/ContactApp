@@ -16,6 +16,10 @@ interface ContactApi {
     suspend fun addContact(
         @Body contactRequest: ContactRequest
     ): Response<AddContactResponse>
+    @POST("register")
+    suspend fun registerUser(
+        @Body userRegister: UserRegister
+    ): Response<UserRegisterResponse>
 
 
     @GET("users")
